@@ -32,12 +32,15 @@ public:
 	int InitEnviromentFromFile(const char* File_Vp, const char* File_Vs, const char* File_Rho);
 	int InitEnviromentFromArray(double* Vp, double* Vs, double* Rho);
 
-	std::list<ContactBoundary>* Bounds();
-	int* Layers();
+	const int* Layers();
+	const int CountLayers();
+	const std::list<ContactBoundary>* Bounds();
+	const std::map<std::pair<int, int>, bool>* ConnectLayer();
+	const std::map<std::pair<int, int>, ContactBoundary*>* BoundOnConnectLayers();
 
-	double* Vp();
-	double* Vs();
-	double* Rho();
+	const double* Vp();
+	const double* Vs();
+	const double* Rho();
 	double h();
 	Index Size();
 

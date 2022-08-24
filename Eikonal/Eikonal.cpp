@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
     {
         for (int j = 0; j < I; j++)
         {
-            for (int k = 0; k < I; k++)
+            /*for (int k = 0; k < I; k++)
             {
                 if ((i - sphere_1.i) * (i - sphere_1.i) + (j - sphere_1.j) * (j - sphere_1.j) + (k - sphere_1.k) * (k - sphere_1.k) <= 25) {
                     vp[(i * I + j) * I + k] = 3.2;
@@ -32,9 +32,9 @@ int main(int argc, char* argv[])
                     vs[(i * I + j) * I + k] = 3.82;
                     rho[(i * I + j) * I + k] = 2.85;
                 }
-            }
+            }*/
 
-            /*for (int k = 0; k < I / 3; k++)
+            for (int k = 0; k < I / 3; k++)
             {
                 vp[(i * I + j) * I + k] = 3.2;
                 vs[(i * I + j) * I + k] = 1.82;
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
                 vp[(i * I + j) * I + k] = 2. * 6.9;
                 vs[(i * I + j) * I + k] = 2. * 3.82;
                 rho[(i * I + j) * I + k] = 2. * 2.85;
-            }*/
+            }
         }
     }
 
@@ -59,7 +59,12 @@ int main(int argc, char* argv[])
     model.InitSize(I, I, I);
     model.InitEnviromentFromArray(vp, vs, rho);
 
-    std::list<ContactBoundary>* cb = model.Bounds();
+    const std::list<ContactBoundary>* cb = model.Bounds();
+
+    Eikonal eik;
+    eik.SetModel(&model);
+    eik.SetSourse(0, 0, 0);
+    eik.Calculate(3.);
     
 
     //Wave3d wave(vp, vs, rho, I, 1.2, f);

@@ -345,14 +345,24 @@ int EnviromentModel::InitEnviromentFromArray(double* vp, double* vs, double* rho
 	return 0;
 }
 
-std::list<ContactBoundary>* EnviromentModel::Bounds() {
+const std::list<ContactBoundary>* EnviromentModel::Bounds() {
 	if (bounds_.empty()) {
 		FindBounds();
 	}
 	return &bounds_;
 }
 
-int* EnviromentModel::Layers()
+const std::map<std::pair<int, int>, bool>* EnviromentModel::ConnectLayer()
+{
+	return &connect_layers_;
+}
+
+const std::map<std::pair<int, int>, ContactBoundary*>* EnviromentModel::BoundOnConnectLayers()
+{
+	return &bound_on_connect_layers_;
+}
+
+const int* EnviromentModel::Layers()
 {
 	if (layers_ == nullptr)	{
 		FindLayers();
@@ -360,15 +370,19 @@ int* EnviromentModel::Layers()
 	return layers_;
 }
 
-double* EnviromentModel::Vp() {
+const int EnviromentModel::CountLayers() {
+	return count_layers_;
+}
+
+const double* EnviromentModel::Vp() {
 	return this->vp_;
 }
 
-double* EnviromentModel::Vs() {
+const double* EnviromentModel::Vs() {
 	return this->vs_;
 }
 
-double* EnviromentModel::Rho() {
+const double* EnviromentModel::Rho() {
 	return rho_;
 }
 

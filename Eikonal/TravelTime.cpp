@@ -30,36 +30,33 @@ void TravelTimeNode::clear() {
 
 
 TravelTimeFld::TravelTimeFld() {
-	size = Index();
-	mesh = nullptr;
+	mesh_ = nullptr;
 }
 
 TravelTimeFld::~TravelTimeFld() {
 	long int mesh_pos = 0;
-	for (int i = 0; i < size.i; ++i) {
-		for (int j = 0; j < size.j; ++j) {
-			for (int k = 0; k < size.k; ++k) {
-				mesh[mesh_pos].clear();
+	for (int i = 0; i < size_.i; ++i) {
+		for (int j = 0; j < size_.j; ++j) {
+			for (int k = 0; k < size_.k; ++k) {
+				mesh_[mesh_pos].clear();
 				++mesh_pos;
 			}
 		}
 	}
-	delete[] mesh;
+	delete[] mesh_;
 }
 
-int TravelTimeFld::set_size(int& I, int& J, int& K) {
-	if ((I <= 0) || (J <= 0) || (K <= 0))
+int TravelTimeFld::set_size(const Index &size) {
+	if ((size.i <= 0) || (size.j <= 0) || (size.k <= 0))
 		return -1;
 
-	size.i = I;
-	size.j = J;
-	size.k = K;
-	mesh = new TravelTimeNode[I * J * K];
+	size_ = size;
+	mesh_ = new TravelTimeNode[size_.i * size.j * size_.k];
 	return 0;
 }
 
 int TravelTimeFld::add_traveltime(int& i, int& j, int& k, double& value) {
-	mesh[(i * size.j + j) * size.k + k].add_value(value);
+	mesh_[(i * size_.j + j) * size_.k + k].add_value(value);
 	return 0;
 }
 

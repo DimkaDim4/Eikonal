@@ -92,3 +92,128 @@ void FastSweep3D(double* grid, bool* frozen_cells, EnviromentModel* model) {
 		}
 	}
 }
+
+
+Eikonal::Eikonal() {
+	this->env_model_ = nullptr;
+}
+
+void Eikonal::SetModel(EnviromentModel* env_model) {
+	env_model_ = env_model;
+	this->ttf_.set_size(env_model_->Size());
+}
+
+void Eikonal::SetSourse(const double& x, const double& y, const double& z) {
+	Task new_task;
+	new_task.calculation_layers.push_back(1);
+	tasks_.push_back(new_task);
+}
+
+void Eikonal::Calculate(const double& time_limit) {
+	Task* current_task = nullptr;
+	bool* frozen_cells = nullptr;
+	double* grid = nullptr;
+	while (!tasks_.empty()) {
+		current_task = &tasks_.front();
+
+		// *** //
+		//FastSweep3D(grid, frozen_cells, env_model_);
+		// *** //
+
+		// analys solution task
+		std::list<std::pair<int, int>> pairs;
+		for (auto it_1 = current_task->calculation_layers.begin(); it_1 != current_task->calculation_layers.end(); it_1++) {
+			for (auto it_2 = env_model_->ConnectLayer()->begin(); it_2 != env_model_->ConnectLayer()->end(); it_2++) {
+				if (it_2->first.first == *it_1) {
+					pairs.push_back(it_2->first);
+				}
+			}
+		}
+
+		for (auto it_1 = pairs.begin(); it_1 != pairs.end();) {
+			for (auto it_2 = current_task->calculation_layers.begin(); it_2 != current_task->calculation_layers.end(); it_2++) {
+				if (it_1->second == *it_2) {
+					it_1 = pairs.erase(it_1);
+					break;
+				}
+				it_1++;
+			}
+		}
+
+		std::map<int, std::list<int>> layer_neigbor;
+		std::list<std::list<int>> group_layer;
+		for (auto it_1 = pairs.begin(); it_1 != pairs.end(); it_1++) {
+			for (auto it_2 = pairs.begin(); it_2 != pairs.end(); it_2++) {
+				if (env_model_->ConnectLayer()->count(std::make_pair(it_1->second, it_2->second))) {
+					layer_neigbor[it_1->second].push_back(it_2->second);
+				}
+			}
+		}
+
+		for (auto it = layer_neigbor.begin(); it != layer_neigbor.end(); it++) {
+			it->second.sort();
+			it->second.unique();
+		}
+
+		if (!layer_neigbor.empty()) {
+			bool is_end = false;
+			group_layer.resize(1);
+			group_layer.begin()->push_back(*layer_neigbor.at(0).begin());
+			//while (!is_end) {
+			for (auto it_1 = group_layer.begin(); it_1 != group_layer.end(); it_1++) {
+				for (auto it_2 = it_1->begin(); it_2 != it_1->end(); it_2++) {
+					for (auto it_3 = layer_neigbor[*it_2].begin(); it_3 != layer_neigbor[*it_2].end(); it_3++) {
+						auto it = std::find(it_1->begin(), it_1->end(), *it_3);
+						if (it == it_1->end()) {
+							it_1->push_back(*it_3);
+						}
+					}
+				}
+				for (auto it_2 = layer_neigbor.begin(); it_2 != layer_neigbor.end(); it_2++) {
+					auto it_3 = std::find(it_1->begin(), it_1->end(), it_2->first);
+					if (it_3 == it_1->end()) {
+						std::list<int> new_group;
+						new_group.push_back(it_2->first);
+						group_layer.push_back(new_group);
+					}
+				}
+			}
+			//}
+		}
+
+		// получили слой - список его соседей, слои и соседи являются соседями current_task->calculation_layers
+		// нужно сгрупировать соседей, одна группа может не касаться другой!
+		// по аналогии с разделением контактных границ
+		// после этого необходимо расчитать всевозможные варианты расчетов
+		// т.е. если в группе 3 слоя, нужно посчитать по отдельности, затем 1 с 2, 2 с 3, 3 с 1, и все три сразу,
+		// при этом нужно учитывать, что в группе все слои не контактируют друг с другом сразу!
+
+
+		std::map<int, Task> tasks;
+		for (auto it_1 = pairs.begin(); it_1 != pairs.end(); it_1++) {
+			tasks[it_1->second].add_front(env_model_->BoundOnConnectLayers()->at(*it_1));
+		}
+		for (auto it = tasks.begin(); it != tasks.end(); it++) {
+			it->second.no_calculation_layers.insert(it->second.no_calculation_layers.end(), current_task->calculation_layers.begin(), current_task->calculation_layers.end());
+			it->second.calculation_layers.push_back(it->first);
+		}
+		
+		
+
+
+		// нашли слои, с которыми контактирует наша область
+		
+		// зная, будет ли простое отражение или нет, добавляем новые задачи для расчета в найденных слоях
+
+		// *** //
+	}
+	// - решаем уравнение в текущем слое
+	// - смотрим, с какими областями контактирует рассматриваемый слой
+	// - по очереди рассчитываем, как из текущего слоя распространится фронт в соседнем слое
+	// - - если скорость в расмматриваемом слое больше, то просто рассчитываем в этой среде
+}
+
+void Eikonal::WriteToFile()
+{
+
+}
