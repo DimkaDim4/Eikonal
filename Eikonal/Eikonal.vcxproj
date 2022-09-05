@@ -144,7 +144,6 @@
     <ClCompile Include="EnviromentModel.cpp" />
     <ClCompile Include="Solver.cpp" />
     <ClCompile Include="TravelTime.cpp" />
-    <ClCompile Include="WaveFront.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContainerList.h" />

@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 struct Index {
 	int i;
@@ -19,23 +20,6 @@ struct Index {
 		return false;
 	}
 };
-
-
-class WaveFront {
-public:
-	void add_node(const Index& _coord, const double& _value);
-
-	void remove_data();
-
-	static int capacity_step;
-
-private:
-	Index* wave_front_coords = nullptr;
-	double* travel_time_values = nullptr;
-	int count = 0;
-	int capacity = 0;
-};
-
 
 class ContactBoundary {
 public:

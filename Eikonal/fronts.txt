@@ -1,0 +1,66 @@
+namefile:	data1.bin	
+layers:	1	
+
+namefile:	data2.bin	data3.bin	
+layers:	1	2	
+
+namefile:	data1.bin	data4.bin	
+layers:	1	1	
+
+namefile:	data2.bin	data5.bin	data6.bin	
+layers:	1	2	3	
+
+namefile:	data2.bin	data3.bin	data7.bin	
+layers:	1	2	2	
+
+namefile:	data2.bin	data3.bin	data7.bin	data8.bin	
+layers:	1	2	2	1	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	
+layers:	1	2	2	2	
+
+namefile:	data2.bin	data3.bin	data7.bin	data10.bin	data11.bin	
+layers:	1	2	2	2	3	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	
+layers:	1	2	2	2	2	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data13.bin	
+layers:	1	2	2	2	2	1	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	
+layers:	1	2	2	2	2	2	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data15.bin	data16.bin	
+layers:	1	2	2	2	2	2	3	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	
+layers:	1	2	2	2	2	2	2	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	data18.bin	
+layers:	1	2	2	2	2	2	2	1	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	data19.bin	
+layers:	1	2	2	2	2	2	2	2	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	data20.bin	data21.bin	
+layers:	1	2	2	2	2	2	2	2	3	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	data19.bin	data22.bin	
+layers:	1	2	2	2	2	2	2	2	2	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	data19.bin	data22.bin	data23.bin	
+layers:	1	2	2	2	2	2	2	2	2	1	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	data19.bin	data22.bin	data24.bin	
+layers:	1	2	2	2	2	2	2	2	2	2	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	data19.bin	data22.bin	data25.bin	data26.bin	
+layers:	1	2	2	2	2	2	2	2	2	2	3	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	data19.bin	data22.bin	data24.bin	data27.bin	
+layers:	1	2	2	2	2	2	2	2	2	2	2	
+
+namefile:	data2.bin	data3.bin	data7.bin	data9.bin	data12.bin	data14.bin	data17.bin	data19.bin	data22.bin	data24.bin	data27.bin	data28.bin	
+layers:	1	2	2	2	2	2	2	2	2	2	2	1	
+
